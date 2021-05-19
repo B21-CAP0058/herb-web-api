@@ -3,6 +3,7 @@ from models.users import User
 from models.roles import Role
 from flask import Flask, jsonify, abort, request, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy.exc import IntegrityError
 import uuid
 
 
@@ -22,10 +23,23 @@ def register():
         ok = db.session.commit()
     except AssertionError as err:
         db.session.rollback()
-        abort(409, err) 
+        return make_response(jsonify(status='failed',
+                                status_code=422, 
+                                data={'error':err}),
+                                422)
+    except IntegrityError as err:
+        db.session.rollback()
+        error_info = err.orig.args
+        return make_response(jsonify(status='failed',
+                                status_code=422, 
+                                data={'error':error_info[1]}),
+                                422)
     except Exception as err:
         db.session.rollback()
-        abort(500, err) 
+        return make_response(jsonify(status='failed',
+                                status_code=500, 
+                                data={'error':err}),
+                                500) 
     finally: 
         db.session.close()
     return make_response(jsonify({'status':'ok','status_code':201}), 201)
