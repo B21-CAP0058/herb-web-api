@@ -20,6 +20,7 @@ from models.premium_status import PremiumStatus
 from models.roles import Role
 
 from api.accounts import *
+from api.herbs import *
 
 version = "0.1"
 
@@ -33,3 +34,15 @@ def seed_data():
     """Init Default Data"""
     click.echo('Inserting roles data')
     Role.generate_default_roles()
+
+@app.errorhandler(500)
+def internal_error(error):
+    response = {
+        'status': 'failed',
+        'status_code': 500,
+        'data': {
+            'error':'something wrong'
+        },
+    }
+
+    return make_response(jsonify(response), 500)

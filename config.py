@@ -10,6 +10,7 @@ class Config(object):
 
 class ProductionConfig(object):
     DEBUG = False
+    JSON_SORT_KEYS = False
     DB_HOST = os.environ.get('DB_HOST') 
     DB_USER = os.environ.get('DB_USER') 
     DB_PASS = os.environ.get('DB_PASS')
