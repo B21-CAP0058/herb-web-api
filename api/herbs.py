@@ -3,6 +3,7 @@ from models.herb_list import HerbList
 from werkzeug.exceptions import HTTPException
 from flask import Flask, jsonify, abort, request, make_response
 from sqlalchemy.orm import load_only
+from sqlalchemy import or_
 from math import ceil
 
 
@@ -103,7 +104,9 @@ def search_herb():
         else:    
             page =  int(request.args.get('page'))
 
-        herb_is_like = HerbList.query.filter(HerbList.description.ilike('{}'.format(keyword)))
+        herb_is_like = HerbList.query.filter(or_(HerbList.name.ilike('%%%s%%' % keyword), 
+                                                HerbList.description.ilike('%%%s%%' % keyword),
+                                                HerbList.tags.ilike('%%%s%%' % keyword)))
         herb_item = herb_is_like.paginate(page,limit,error_out=False).items
         total_page =  ceil(herb_is_like.count()/limit)
         result = [{col: getattr(d, col) for col in cols} for d in herb_item]
