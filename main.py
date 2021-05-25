@@ -34,11 +34,13 @@ def seed_data():
     """Init Default Data"""
     click.echo('Inserting roles data')
     Role.generate_default_roles()
+    click.echo('Inserting herbs data')
+    HerbList.import_data()
 
 @app.errorhandler(Exception)
 def internal_error(err):
     """
-        Global Route to handle All Error Status Codes
+    Global Route to handle All Error Status Codes
     """
     if isinstance(err, HTTPException):
         if type(err).__name__ == 'NotFound':

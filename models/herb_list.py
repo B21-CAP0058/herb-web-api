@@ -1,5 +1,6 @@
 from main import db
 from sqlalchemy.sql import func
+import csv
 
 class HerbList(db.Model):
     __tablename__ = 'herb_list'
@@ -32,3 +33,23 @@ class HerbList(db.Model):
             'is_favorited': 0,
             'created_at': self.created_at
         }
+    
+    @staticmethod
+    def import_data():
+        """ Import to table herb_list from csvfile """
+        with open('data/dataset-0.1.csv', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row['Id']:
+                    data = HerbList(uuid=row['Id'],
+                                    name=row['Name'],
+                                    description=row['Deskripsi'],
+                                    efficacy=row['Khasiat'],
+                                    recipt=row['Resep'],
+                                    tags=row['Tag'],
+                                    image=row['Image'])
+                    db.session.add(data)
+                    try:
+                        db.session.commit()
+                    except:
+                        db.session.rollback()
