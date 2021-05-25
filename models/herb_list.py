@@ -17,3 +17,18 @@ class HerbList(db.Model):
 
     def __repr__(self):
         return '<HerbList {}>'.format(self.name)
+    
+    @property
+    def serialize(self):
+        """Return object data in serializeable format"""
+        return {
+            'uuid': self.uuid,
+            'name': self.name,
+            'description': self.description,
+            'efficacy': self.efficacy,
+            'recipt': self.recipt,
+            'image': self.image,
+            'tags': self.tags,
+            'is_favorited': 0,
+            'created_at': self.created_at
+        }
