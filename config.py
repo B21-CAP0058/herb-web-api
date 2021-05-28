@@ -15,5 +15,7 @@ class ProductionConfig(object):
     DB_USER = os.environ.get('DB_USER') 
     DB_PASS = os.environ.get('DB_PASS')
     DB_NAME = os.environ.get('DB_NAME')
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@{}/{}'.format(DB_USER,DB_PASS,DB_HOST,DB_NAME)
+    DB_INSTANCE = os.environ.get('DB_INSTANCE')
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{}:{}@{}/{}'.format(DB_USER,DB_PASS,DB_HOST,DB_NAME) 
+    #SQLALCHEMY_DATABASE_URI= 'mysql+pymysql://{nam}:{pas}@/{dbn}?unix_socket=/cloudsql/{con}'.format(nam=DB_USER,pas=DB_PASS,dbn=DB_NAME,con=DB_INSTANCE)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
