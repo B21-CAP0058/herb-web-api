@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from config import Config, ProductionConfig
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -27,8 +27,8 @@ version = "0.1"
 @app.route('/')
 def index():
     ts = time.time()
-    return jsonify({"version":version,"time": str(time.time()-ts)})
-
+    return render_template('index.html')
+   
 @app.cli.command()
 def seed_data():
     """Init Default Data"""
