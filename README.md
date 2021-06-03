@@ -1,9 +1,9 @@
 # Leafwell Description
-Leafwell is apps for herbal identification through images, this is the part of web api to deliver data to mobile apps.
+Leafwell is apps for herbal identification through images, this is the part of the project as web api to deliver data to mobile apps.
 
 # Database schema
 
-[database]: https://github.com/sahalaww/bangjek-web/docs/db-scheme.png "Database Scheme"
+![database](https://raw.githubusercontent.com/sahalaww/bangjek-web/main/docs/db-scheme.png?raw=True)
 
 
 # Dev ENV
@@ -87,6 +87,7 @@ gcloud run deploy $SERVICE_NAME --image $IMAGE_URL --region $REGION
 # Live Web Apps
 
 [https://herb-bangjek-oiabruca3q-et.a.run.app](https://herb-bangjek-oiabruca3q-et.a.run.app)
+
 [https://herb.azzic.xyz](https://herb.azzic.xyz)
 # API Documentation
 
