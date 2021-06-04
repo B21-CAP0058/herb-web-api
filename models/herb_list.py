@@ -37,18 +37,19 @@ class HerbList(db.Model):
     @staticmethod
     def import_data():
         """ Import to table herb_list from csvfile """
-        with open('data/dataset-0.1.csv', newline='') as csvfile:
+        with open('data/dataset-0.2.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 if row['Id']:
                     data = HerbList(uuid=row['Id'],
-                                    name=row['Name'],
+                                    name=row['Nama Indo'],
                                     description=row['Deskripsi'],
                                     efficacy=row['Khasiat'],
                                     recipt=row['Resep'],
                                     tags=row['Tag'],
                                     image=row['Image'])
                     db.session.add(data)
+                    print(data)
                     try:
                         db.session.commit()
                     except:
