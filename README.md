@@ -83,13 +83,25 @@ cp .env.example .env
 gcloud builds submit --tag gcr.io/$PROJECT_ID/$IMAGE_NAME:$version
 gcloud run deploy $SERVICE_NAME --image $IMAGE_URL --region $REGION 
 ```
+# Setup CI/CD
+
+You can refer to Cloud Build documentation, link already on reference.
+
 
 # Live Web Apps
 
 [https://herb-bangjek-oiabruca3q-et.a.run.app](https://herb-bangjek-oiabruca3q-et.a.run.app)
 
 [https://herb.azzic.xyz](https://herb.azzic.xyz)
+
 # API Documentation
 
 You can visit our wiki : [link](https://github.com/sahalaww/bangjek-web/wiki/API-Documentation)
 
+# References
+
+1. [Serverless VPC](https://cloud.google.com/vpc/docs/configure-serverless-vpc-access)
+
+2. [Cloud Build](https://cloud.google.com/build/docs/deploying-builds/deploy-cloud-run#before_you_begin)
+
+3. [Service Account Problem on CI/CD Cloud Build](https://stackoverflow.com/questions/62783869/why-am-i-seeing-this-error-error-gcloud-run-deploy-permission-denied-the-c)
